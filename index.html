@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para María Fernanda 🌻</title>
+
+<style>
+/* =====================================================
+   CONFIGURACIÓN GENERAL
+===================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: radial-gradient(circle at 50% 30%, #ff8ac5, #ec3d91 45%, #b50061);
+    font-family: Georgia, "Times New Roman", serif;
+    color: #392727;
+}
+
+/* =====================================================
+   CORAZONES DEL FONDO
+===================================================== */
+.fondo {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.corazon-fondo {
+    position: absolute;
+    color: rgba(255,255,255,.22);
+    font-size: 40px;
+    animation: flotar 10s linear infinite;
+}
+
+@keyframes flotar {
+    from {
+        transform: translateY(110vh) rotate(0deg);
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-20vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* =====================================================
+   TARJETA PRINCIPAL
+===================================================== */
+.pagina {
+    position: relative;
+    z-index: 2;
+    width: min(95%, 1100px);
+    margin: 30px auto;
+}
+
+.tarjeta {
+    background: #f8eee3;
+    border-radius: 35px;
+    padding: 35px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+
+/* =====================================================
+   TITULO
+===================================================== */
+.intro {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.intro h1 {
+    font-size: clamp(27px, 5vw, 43px);
+    color: #452a2a;
+}
+
+.intro p {
+    margin-top: 10px;
+    font-size: 17px;
+    opacity: .75;
+}
+
+/* =====================================================
+   ESCENA DEL ÁRBOL
+===================================================== */
+.escena {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+}
+
+/* =====================================================
+   SUELO
+===================================================== */
+.suelo {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 22px;
+    border-radius: 50%;
+    background: #69351c;
+    opacity: .7;
+}
+
+/* =====================================================
+   TRONCO PRINCIPAL
+===================================================== */
+.tronco {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 58px;
+    height: 310px;
+    border-radius: 30px 30px 10px 10px;
+    background: linear-gradient(90deg, #633017, #a75c29, #6b3217);
+    animation: aparecerTronco 2s ease-out forwards;
+}
+
+@keyframes aparecerTronco {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 310px;
+        opacity: 1;
+    }
+}
+
+/* =====================================================
+   RAMAS
+===================================================== */
+.rama {
+    position: absolute;
+    height: 14px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #673017, #a85d29);
+    transform-origin: left center;
+    opacity: 0;
+    animation: crecerRama 1.8s ease-out forwards;
+}
+
+@keyframes crecerRama {
+    from {
+        transform: rotate(var(--angulo)) scaleX(0);
+        opacity: 0;
+    }
+    to {
+        transform: rotate(var(--angulo)) scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* =====================================================
+   RAMAS PRINCIPALES
+===================================================== */
+.r1 { width: 210px; left: calc(50% - 5px); bottom: 230px; --angulo: -145deg; animation-delay: 1.3s; }
+.r2 { width: 210px; left: calc(50% + 5px); bottom: 260px; --angulo: -35deg; animation-delay: 1.5s; }
+.r3 { width: 180px; left: calc(50% - 5px); bottom: 310px; --angulo: -160deg; animation-delay: 1.8s; }
+.r4 { width: 180px; left: calc(50% + 5px); bottom: 330px; --angulo: -20deg; animation-delay: 2s; }
+.r5 { width: 140px; left: calc(50% - 5px); bottom: 375px; --angulo: -145deg; animation-delay: 2.2s; }
+.r6 { width: 140px; left: calc(50% + 5px); bottom: 390px; --angulo: -35deg; animation-delay: 2.4s; }
+.r7 { width: 100px; left: calc(50% - 5px); bottom: 435px; --angulo: -160deg; animation-delay: 2.6s; }
+.r8 { width: 100px; left: calc(50% + 5px); bottom: 445px; --angulo: -20deg; animation-delay: 2.8s; }
+
+/* =====================================================
+   CORAZÓN DE FLORES
+===================================================== */
+.corazon-flores {
+    position: absolute;
+    width: 520px;
+    height: 440px;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* =====================================================
+   FLORES
+===================================================== */
+.flor {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    opacity: 0;
+    transform: scale(0);
+    animation: aparecerFlor .65s cubic-bezier(.17, .67, .35, 1.5) forwards;
+}
+
+/* Pétalos */
+.flor::before {
+    content: "";
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    top: 4px;
+    left: 4px;
+    border-radius: 50%;
+    background: #ffd51b;
+    box-shadow: 
+        0 -9px 0 #ffe04a, 
+        0 9px 0 #ffe04a, 
+        -9px 0 0 #ffe04a, 
+        9px 0 0 #ffe04a, 
+        -6px -6px 0 #ffd51b, 
+        6px -6px 0 #ffd51b, 
+        -6px 6px 0 #ffd51b, 
+        6px 6px 0 #ffd51b;
+}
+
+/* Centro */
+.flor::after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top: 8px;
+    left: 8px;
+    border-radius: 50%;
+    background: #754500;
+    z-index: 2;
+}
+
+@keyframes aparecerFlor {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-40deg);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.25) rotate(10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* =====================================================
+   CONTADORES
+===================================================== */
+.contadores {
+    margin-top: 20px;
+}
+
+.contador {
+    text-align: center;
+    background: rgba(255,255,255,.55);
+    border-radius: 22px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.contador-titulo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.contador-subtitulo {
+    font-size: 15px;
+    opacity: .7;
+    margin-bottom: 12px;
+}
+
+.tiempo {
+    font-size: clamp(16px, 3vw, 24px);
+    font-weight: bold;
+    color: #b00062;
+}
+
+/* =====================================================
+   CARTA
+===================================================== */
+.carta {
+    margin-top: 35px;
+    background: #fffaf3;
+    border-radius: 25px;
+    padding: clamp(25px, 5vw, 50px);
+    line-height: 1.8;
+    font-size: 17px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+}
+
+.carta h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #7c3155;
+}
+
+.carta p {
+    margin-bottom: 20px;
+}
+
+.firma {
+    text-align: right;
+    font-size: 21px;
+    font-style: italic;
+    margin-top: 30px;
+    color: #7c3155;
+}
+
+/* =====================================================
+   PANTALLA INICIAL
+===================================================== */
+.pantalla-inicial {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #ff78b9, #d00070);
+    transition: opacity 1s ease;
+}
+
+.pantalla-inicial.ocultar {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.inicio {
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+.inicio h1 {
+    font-size: clamp(28px, 7vw, 50px);
+    margin-bottom: 15px;
+}
+
+.inicio p {
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+.boton {
+    border: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    background: white;
+    color: #c40068;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,.2);
+    transition: .25s;
+}
+
+.boton:hover {
+    transform: scale(1.05);
+}
+
+/* =====================================================
+   CELULAR
+===================================================== */
+@media(max-width:650px) {
+    .tarjeta {
+        padding: 18px;
+        border-radius: 25px;
+    }
+    .escena {
+        height: 500px;
+    }
+    .tronco {
+        width: 40px;
+        height: 230px;
+    }
+    .rama {
+        height: 10px;
+    }
+    .r1, .r2 { width: 140px; }
+    .r3, .r4 { width: 120px; }
+    .r5, .r6 { width: 90px; }
+    .r7, .r8 { width: 70px; }
+    .corazon-flores {
+        transform: translateX(-50%) scale(.72);
+        transform-origin: top center;
+    }
+    .carta {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     PANTALLA INICIAL
+===================================================== -->
+<div class="pantalla-inicial" id="pantallaInicial">
+    <div class="inicio">
+        <h1>🌻 Para María Fernanda</h1>
+        <p>Tengo algo que quiero enseñarte...</p>
+        <button class="boton" onclick="comenzar()">Abrir mi regalo ❤️</button>
+    </div>
+</div>
+
+<!-- =====================================================
+     CORAZONES DEL FONDO
+===================================================== -->
+<div class="fondo">
+    <div class="corazon-fondo" style="left:5%;animation-delay:0s">♡</div>
+    <div class="corazon-fondo" style="left:20%;animation-delay:2s">♡</div>
+    <div class="corazon-fondo" style="left:38%;animation-delay:4s">♡</div>
+    <div class="corazon-fondo" style="left:55%;animation-delay:1s">♡</div>
+    <div class="corazon-fondo" style="left:73%;animation-delay:3s">♡</div>
+    <div class="corazon-fondo" style="left:90%;animation-delay:5s">♡</div>
+</div>
+
+<!-- =====================================================
+     PÁGINA
+===================================================== -->
+<div class="pagina">
+<div class="tarjeta">
+
+<div class="intro">
+    <h1>Para la mujer que amo 🌻</h1>
+    <p>Algunas historias comienzan sin saber que terminarán convirtiéndose en toda una vida.</p>
+</div>
+
+<!-- =====================================================
+     ÁRBOL
+===================================================== -->
+<div class="escena">
+    <div class="suelo"></div>
+    <div class="tronco"></div>
+    
+    <!-- RAMAS -->
+    <div class="rama r1"></div>
+    <div class="rama r2"></div>
+    <div class="rama r3"></div>
+    <div class="rama r4"></div>
+    <div class="rama r5"></div>
+    <div class="rama r6"></div>
+    <div class="rama r7"></div>
+    <div class="rama r8"></div>
+
+    <!-- CORAZÓN -->
+    <div class="corazon-flores" id="corazonFlores"></div>
+</div>
+
+<!-- =====================================================
+     CONTADORES
+===================================================== -->
+<div class="contadores">
+
+    <div class="contador">
+        <div class="contador-titulo">Nuestra historia comenzó ❤️</div>
+        <div class="contador-subtitulo">11 de octubre de 2025</div>
+        <div class="tiempo" id="contadorHistoria">Calculando...</div>
+    </div>
+
+    <div class="contador">
+        <div class="contador-titulo">Pero la vida nos juntó 🌻</div>
+        <div class="contador-subtitulo">8 de junio de 2026</div>
+        <div class="tiempo" id="contadorVida">Calculando...</div>
+    </div>
+
+</div>
+
+<!-- =====================================================
+     CARTA
+===================================================== -->
+<div class="carta">
+    <h2>Querida María Fernanda</h2>
+    <p>Desde que te conocí han surgido varias preguntas, sobre todo mías tratando de recordar cómo era mi vida antes de ti, tarea que nunca puedo completar porque no tiene sentido para mí, desde que llegaste impactaste tanto mi vida que no quiero volver atrás.</p>
+    <p>Te amo, no solamente porque eres mi novia, te amo porque desde el primer día sigues siendo la misma persona que eres hasta ahora, porque me amas justo como soy, aun con defectos. Porque siempre —aun cuando no puedes— buscas la manera de estar.</p>
+    <p>Gracias no solo por ser mi novia, sino por elegirme como un compañero de vida. Sin duda el privilegio más grande, y más serlo de la mujer más dulce, con el corazón más puro y con la sonrisa y ojos más hermosos del mundo.</p>
+    
+    <div class="firma">
+        Te amo,<br>
+        Alexis ❤️
+    </div>
+</div>
+
+</div>
+</div>
+
+<script>
+/* =====================================================
+   PANTALLA INICIAL
+===================================================== */
+function comenzar() {
+    document.getElementById("pantallaInicial").classList.add("ocultar");
+}
+
+/* =====================================================
+   CREACIÓN DEL CORAZÓN
+===================================================== */
+const contenedor = document.getElementById("corazonFlores");
+
+const floresBorde = [];
+const floresInterior = [];
+
+/* -----------------------------------------------------
+   1. DIBUJAR EL BORDE PRIMERO
+----------------------------------------------------- */
+for (let t = 0; t < Math.PI * 2; t += 0.06) {
+    const x = 16 * Math.pow(Math.sin(t), 3);
+    const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+
+    floresBorde.push({
+        x: x * 13 + 260,
+        y: -y * 13 + 215
+    });
+}
+
+/* -----------------------------------------------------
+   2. CALCULAR EL RELLENO INTERIOR
+----------------------------------------------------- */
+for (let s = 0.9; s > 0.05; s -= 0.09) {
+    let paso = 0.06 / s;
+    for (let t = 0; t < Math.PI * 2; t += paso) {
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+
+        floresInterior.push({
+            x: (x * 13 * s) + 260,
+            y: -(y * 13 * s) + 215
+        });
+    }
+}
+
+/* -----------------------------------------------------
+   3. ANIMACIÓN Y RENDERIZADO
+----------------------------------------------------- */
+floresInterior.sort(() => Math.random() - 0.5);
+
+const todasLasFlores = [...floresBorde, ...floresInterior];
+
+todasLasFlores.forEach((posicion, indice) => {
+    const flor = document.createElement("div");
+    flor.className = "flor";
+
+    flor.style.left = posicion.x + "px";
+    flor.style.top = posicion.y + "px";
+
+    flor.style.animationDelay = (3 + indice * 0.015) + "s";
+
+    contenedor.appendChild(flor);
+});
+
+/* =====================================================
+   CONTADORES
+===================================================== */
+const inicioHistoria = new Date("2025-10-11T00:00:00");
+const inicioVida = new Date("2026-06-08T00:00:00");
+
+function calcularTiempo(fechaInicio) {
+    const ahora = new Date();
+    let años = ahora.getFullYear() - fechaInicio.getFullYear();
+    let meses = ahora.getMonth() - fechaInicio.getMonth();
+    let dias = ahora.getDate() - fechaInicio.getDate();
+
+    if (dias < 0) {
+        meses--;
+        const ultimoDia = new Date(ahora.getFullYear(), ahora.getMonth(), 0).getDate();
+        dias += ultimoDia;
+    }
+
+    if (meses < 0) {
+        años--;
+        meses += 12;
+    }
+
+    const fechaBase = new Date(fechaInicio);
+    fechaBase.setFullYear(fechaBase.getFullYear() + años);
+    fechaBase.setMonth(fechaBase.getMonth() + meses);
+    fechaBase.setDate(fechaBase.getDate() + dias);
+
+    let diferencia = ahora - fechaBase;
+
+    let horas = Math.floor(diferencia / (1000 * 60 * 60));
+    diferencia %= 1000 * 60 * 60;
+
+    let minutos = Math.floor(diferencia / (1000 * 60));
+    diferencia %= 1000 * 60;
+
+    let segundos = Math.floor(diferencia / 1000);
+
+    return { años, meses, dias, horas, minutos, segundos };
+}
+
+function actualizarContadores() {
+    const historia = calcularTiempo(inicioHistoria);
+    const vida = calcularTiempo(inicioVida);
+
+    document.getElementById("contadorHistoria").textContent = 
+        `${historia.años} años, ${historia.meses} meses, ${historia.dias} días, ${historia.horas} horas, ${historia.minutos} minutos y ${historia.segundos} segundos`;
+
+    document.getElementById("contadorVida").textContent = 
+        `${vida.años} años, ${vida.meses} meses, ${vida.dias} días, ${vida.horas} horas, ${vida.minutos} minutos y ${vida.segundos} segundos`;
+}
+
+actualizarContadores();
+setInterval(actualizarContadores, 1000);
+
+</script>
+</body>
+</html>
